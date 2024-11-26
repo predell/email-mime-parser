@@ -13,16 +13,16 @@ For maven project :
 
 ```
 <dependency>
-  <groupId>tech.blueglacier</groupId>
+  <groupId>com.predell</groupId>
   <artifactId>email-mime-parser</artifactId>
-  <version>1.0.5</version>
+  <version>0.0.2</version>
 </dependency>
 ```
 
 For gradle project :
 
 ```
-compile([group: 'tech.blueglacier', name: 'email-mime-parser', version: '1.0.5'])
+compile([group: 'com.predell', name: 'email-mime-parser', version: '0.0.2'])
 ```
 
 **Sample code :**
@@ -51,7 +51,7 @@ String cc = email.getCCEmailHeaderValue();
 String from = email.getFromEmailHeaderValue();
 ```
 
-For more info check the test case file **'src\test\java\tech\blueglacier\parser\ParserTest.java'**
+For more info check the test case file **'src\test\java\com\predell\parser\ParserTest.java'**
 
 
 
