@@ -16,6 +16,9 @@ import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ *
+ */
 public class MimeWordDecoder{
 	
 	private static Log log = LogFactory.getLog(DecoderUtil.class);
