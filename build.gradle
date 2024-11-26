@@ -13,13 +13,6 @@ java {
 }
 
 jreleaser {
-    signing {
-        active = 'ALWAYS'
-        armored = true
-        passphrase = System.getenv("GPG_PASSPHRASE")
-        publicKey = System.getenv("GPG_PUBLIC_KEY")
-        secretKey = System.getenv("GPG_PRIVATE_KEY")
-    }
     deploy {
         maven {
             mavenCentral {
@@ -33,6 +26,13 @@ jreleaser {
                 }
             }
         }
+    }
+    signing {
+        active = 'ALWAYS'
+        armored = true
+        passphrase = System.getenv("GPG_PASSPHRASE")
+        publicKey = System.getenv("GPG_PUBLIC_KEY")
+        secretKey = System.getenv("GPG_PRIVATE_KEY")
     }
 }
 
@@ -68,12 +68,12 @@ dependencies {
 
 test {
     useTestNG()
-    testLogging.showCauses = true;
-    testLogging.showExceptions = true;
-    testLogging.showStackTraces = true;
-    testLogging.showStandardStreams = true;
-    testLogging.exceptionFormat = 'full';
-    testLogging.events "started", "passed", "skipped", "failed", "standardOut", "standardError";
+    testLogging.showCauses = true
+    testLogging.showExceptions = true
+    testLogging.showStackTraces = true
+    testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = 'full'
+    testLogging.events "started", "passed", "skipped", "failed", "standardOut", "standardError"
 }
 
 publishing {
