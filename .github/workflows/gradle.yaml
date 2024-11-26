@@ -17,12 +17,11 @@ jobs:
         uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
       - name: Publish package
-        run: ./gradlew jreleaserFullRelease
+        run: ./gradlew jreleaserFullRelease -Pversion=${{ github.ref_name }}
         env:
           GPG_PASSPHRASE: ${{ secrets.PASSPHRASE }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GPG_PUBLIC_KEY: ${{ vars.GPG_PUBLIC_KEY }}
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          JRELEASER_PROJECT_VERSION: ${{ github.ref_name }}
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
