@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ *
+ */
 public class CodecUtil {
 	static final int DEFAULT_ENCODING_BUFFER_SIZE = 1024;
 
@@ -12,7 +15,7 @@ public class CodecUtil {
 	 * @param in not null
 	 * @param out not null
 	 * @return total bytes transferred
-	 * @throws IOException
+	 * @throws IOException IO Exception
 	 */
 	public static int copy(final InputStream in, final OutputStream out) throws IOException {
 		final byte[] buffer = new byte[DEFAULT_ENCODING_BUFFER_SIZE];

@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ *
+ */
 public class ContentDispositionDecoder {
 
 	private static ContentDispositionHeaderValue decodeContentDisposition(
@@ -88,6 +91,12 @@ public class ContentDispositionDecoder {
 		}
 	}
 
+	/**
+	 *
+	 * @param contentDispositionParameters Content disposition parameters
+	 * @return disposition file name
+	 * @throws MimeException Mime Exception
+	 */
 	public static String decodeDispositionFileName(Map<String, String> contentDispositionParameters) throws MimeException {
 		// Refer RFC 2183 'The Content-Disposition Header Field' and
 		// RFC 2184 'Parameter Value Character Set and Language Information'

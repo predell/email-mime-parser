@@ -10,7 +10,12 @@ import java.io.InputStream;
  * To Do: Persist large files to filesystem for efficiency
  */
 public class EmailAttachment extends Attachment {
-	
+
+	/**
+	 *
+	 * @param bd Body descriptor
+	 * @param is Input stream
+	 */
 	public EmailAttachment(BodyDescriptor bd, InputStream is){
 		super(bd, is);
 	}

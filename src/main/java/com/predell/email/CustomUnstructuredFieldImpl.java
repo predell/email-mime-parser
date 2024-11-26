@@ -15,6 +15,11 @@ public class CustomUnstructuredFieldImpl extends AbstractField implements Unstru
 
     private String value;
 
+    /**
+     *
+     * @param rawField Raw field
+     * @param monitor Decode monitor
+     */
     public CustomUnstructuredFieldImpl(Field rawField, DecodeMonitor monitor) {
         super(rawField, monitor);
     }
@@ -37,6 +42,9 @@ public class CustomUnstructuredFieldImpl extends AbstractField implements Unstru
         parsed = true;
     }
 
+    /**
+     *
+     */
     public static final FieldParser<UnstructuredField> PARSER = new FieldParser<UnstructuredField>() {
 
         public UnstructuredField parse(final Field rawField, final DecodeMonitor monitor) {

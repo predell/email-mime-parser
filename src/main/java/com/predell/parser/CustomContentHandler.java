@@ -12,14 +12,24 @@ import org.apache.james.mime4j.stream.Field;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ *
+ */
 public class CustomContentHandler extends AbstractContentHandler {
 
     private Email email;
 
+    /**
+     *
+     */
     public CustomContentHandler() {
         this.email = new Email();
     }
 
+    /**
+     *
+     * @return Email
+     */
     public Email getEmail() {
         return email;
     }

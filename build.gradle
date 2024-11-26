@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'org.jreleaser' version '1.15.0'
     id 'maven-publish'
 }
 
@@ -7,7 +8,32 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
+    withJavadocJar()
     withSourcesJar()
+}
+
+jreleaser {
+    signing {
+        active = 'ALWAYS'
+        armored = true
+        passphrase = System.getenv("GPG_PASSPHRASE")
+        publicKey = System.getenv("GPG_PUBLIC_KEY")
+        secretKey = System.getenv("GPG_PRIVATE_KEY")
+    }
+    deploy {
+        maven {
+            mavenCentral {
+                sonatype {
+                    active = 'ALWAYS'
+                    applyMavenCentralRules = true
+                    password = System.getenv("MAVEN_PASSWORD")
+                    url = 'https://central.sonatype.com/api/v1/publisher'
+                    username = System.getenv("MAVEN_USERNAME")
+                    stagingRepository('libs')
+                }
+            }
+        }
+    }
 }
 
 repositories {
@@ -52,21 +78,33 @@ test {
 
 publishing {
     publications {
-        binaryAndSources(MavenPublication) {
+        maven(MavenPublication) {
             from components.java
 
             artifactId = "email-mime-parser"
             group = "com.predell"
+            pom {
+                name = "email-mime-parser"
+                description = 'A mime4j based simplified email mime parser for java'
+                url = 'https://github.com/predell/email-mime-parser'
+                inceptionYear = '2024'
+                licenses {
+                    license {
+                        name = 'Apache-2.0'
+                        url = 'https://spdx.org/licenses/Apache-2.0.html'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/predell/email-mime-parser.git'
+                    developerConnection = 'scm:git:ssh://github.com/predell/email-mime-parser.git'
+                    url = 'https://github.com/predell/email-mime-parser'
+                }
+            }
         }
     }
     repositories {
         maven {
-            name = "OSSRH"
-            url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
-            }
+            url = layout.buildDirectory.dir('libs')
         }
     }
 }

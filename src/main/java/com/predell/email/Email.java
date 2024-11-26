@@ -37,35 +37,59 @@ public class Email {
 	private Stack<EmailMessageType> emailMessageStack;
 	private int decodedEmailSize;
 	private int emailSize;
-	
+
+	/**
+	 *
+	 * @return Email size
+	 */
 	public int getEmailSize() {
 		return emailSize;
 	}
 
+	/**
+	 *
+	 * @return Decoded email size
+	 */
 	public int getDecodedEmailSize() {
 		return decodedEmailSize;
 	}
 
 	Logger LOGGER = LoggerFactory.getLogger(Email.class);
 
+	/**
+	 *
+	 */
 	public Email(){
 		this.header = new HeaderImpl();
-		this.attachments = new ArrayList<Attachment>();
+		this.attachments = new ArrayList<>();
 		this.attachmentReplacedInHtmlBody = false;
-		this.multipartStack = new Stack<MultipartType>();
-		this.emailMessageStack = new Stack<EmailMessageType>();
+		this.multipartStack = new Stack<>();
+		this.emailMessageStack = new Stack<>();
 		this.decodedEmailSize = 0;
 		this.emailSize = 0;
 	}
 
+	/**
+	 *
+	 * @return Header
+	 */
 	public Header getHeader() {
 		return header;
 	}
-	
+
+	/**
+	 *
+	 * @return Plain text email body
+	 */
 	public Attachment getPlainTextEmailBody(){		
 		return plainTextEmailBody;
 	}
-	
+
+	/**
+	 *
+	 * @param bd Body descriptor
+	 * @param is Input stream
+	 */
 	public void fillEmailContents(BodyDescriptor bd, InputStream is){
 		LOGGER.info("mime part received");
 		if(addPlainTextEmailBody(bd,is)){}
@@ -99,14 +123,26 @@ public class Email {
 		return shouldIgnore;
 	}
 
+	/**
+	 *
+	 * @return Multipart stack
+	 */
 	public Stack<MultipartType> getMultipartStack() {
 		return multipartStack;
 	}
-	
+
+	/**
+	 *
+	 * @return message stack
+	 */
 	public Stack<EmailMessageType> getMessageStack() {
 		return emailMessageStack;
 	}
-	
+
+	/**
+	 *
+	 * @return Email subject
+	 */
 	public String getEmailSubject(){
 		Field subjectField = header.getField("Subject");	
 		if (subjectField != null) {
@@ -115,7 +151,11 @@ public class Email {
 		}
 		return null;
 	}
-	
+
+	/**
+	 *
+	 * @return To email header value
+	 */
 	public String getToEmailHeaderValue() {
 		Field to = header.getField("To");
 		if (to != null) {
@@ -123,7 +163,11 @@ public class Email {
 		}
 		return null;
 	}
-	
+
+	/**
+	 *
+	 * @return CC email header value
+	 */
 	public String getCCEmailHeaderValue(){
 		Field cc = header.getField("Cc");	
 		if (cc != null) {
@@ -132,6 +176,10 @@ public class Email {
 		return null;
 	}
 
+	/**
+	 *
+	 * @return BCC Email header value
+	 */
 	public String getBCCEmailHeaderValue(){
 		Field bcc = header.getField("Bcc");
 		if (bcc != null) {
@@ -139,7 +187,11 @@ public class Email {
 		}
 		return null;
 	}
-	
+
+	/**
+	 *
+	 * @return From email header value
+	 */
 	public String getFromEmailHeaderValue(){
 		Field from = header.getField("From");	
 		if (from != null) {			
@@ -229,18 +281,33 @@ public class Email {
 		return (emailPlainBodyDescriptor.getMimeType().equalsIgnoreCase("text/plain") && bodyName == null);
 	}
 
+	/**
+	 *
+	 * @return List of attachments
+	 */
 	public List<Attachment> getAttachments() {		
 		return attachments;
 	}
 
+	/**
+	 *
+	 * @return HTML email body
+	 */
 	public Attachment getHTMLEmailBody() {		
 		return htmlEmailBody;
 	}
-	
+
+	/**
+	 *
+	 * @return Calendar body
+	 */
 	public Attachment getCalendarBody() {		
 		return calendarBody;
 	}
 
+	/**
+	 *
+	 */
 	public void reArrangeEmail() {
 		decodedEmailSize = setEmailSize();
 		replaceInlineImageAttachmentsInHtmlBody();		
@@ -342,6 +409,10 @@ public class Email {
 		return (mediaType != null);
 	}
 
+	/**
+	 *
+	 * @return Whether the attachment is replaced in HTML body
+	 */
 	public boolean isAttachmentReplacedInHtmlBody() {
 		return attachmentReplacedInHtmlBody;
 	}

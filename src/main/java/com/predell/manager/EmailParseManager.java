@@ -13,16 +13,29 @@ import org.apache.james.mime4j.stream.MimeConfig;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ *
+ */
 public class EmailParseManager {
 
 	InputStream rawEmailFile;
 	ContentHandler contentHandler;
-	
+
+	/**
+	 *
+	 * @param rawEmailFile Raw email file
+	 */
 	public EmailParseManager(InputStream rawEmailFile) {
 		this.rawEmailFile = rawEmailFile;
 		contentHandler = new CustomContentHandler();
-	}	
+	}
 
+	/**
+	 *
+	 * @return Parsed email
+	 * @throws MimeException Mime exception
+	 * @throws IOException IO Exception
+	 */
 	public Email getParsedEmail() throws MimeException, IOException {
 		
 		MimeConfig mime4jParserConfig = MimeConfig.DEFAULT;

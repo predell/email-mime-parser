@@ -6,6 +6,9 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.util.Properties;
 
+/**
+ *
+ */
 public class AppConfig {
 
 	private volatile static AppConfig objectInstance = null;
@@ -17,6 +20,10 @@ public class AppConfig {
         this.appConfig = new XMLConfiguration();
     }
 
+	/**
+	 *
+	 * @return An AppConfigInstance
+	 */
 	public static AppConfig getInstance() {
 		if (objectInstance == null) {
 			synchronized (AppConfig.class) {
@@ -28,6 +35,10 @@ public class AppConfig {
 		return objectInstance;
 	}
 
+	/**
+	 *
+	 * @return Char Set Map
+	 */
 	public Properties getCharSetMap() {
 		if (charSetMap == null) {
 			synchronized (AppConfig.class) {
@@ -49,6 +60,11 @@ public class AppConfig {
 		return charSetMap;
 	}
 
+	/**
+	 *
+	 * @param fileName File name
+	 * @return True if is image format
+	 */
 	public boolean isImageFormat(String fileName) {
 		if (fileName != null && !fileName.isEmpty()) {
 			String[] arrImageFormat = appConfig.getStringArray("appSettings.imageFileFormats");

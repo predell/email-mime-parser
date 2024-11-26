@@ -8,6 +8,9 @@ import org.apache.james.mime4j.storage.StorageProvider;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ *
+ */
 public abstract class AbstractStorageProvider implements StorageProvider {
 
 	/**
@@ -39,7 +42,11 @@ public abstract class AbstractStorageProvider implements StorageProvider {
     
     private int totalBytesTransffered;
 
-	public int getTotalBytesTransffered() {
+    /**
+     *
+     * @return Total bytes transferred
+     */
+	public int getTotalBytesTransferred() {
 		return totalBytesTransffered;
 	}
 
