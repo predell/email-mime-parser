@@ -40,6 +40,11 @@ jreleaser {
         copyright = 'Predell Services'
         description = 'Email MIME parser'
     }
+    release {
+        github {
+            overwrite = true
+        }
+    }
 }
 
 repositories {
