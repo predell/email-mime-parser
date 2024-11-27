@@ -13,26 +13,32 @@ java {
 }
 
 jreleaser {
-    deploy {
-        maven {
-            mavenCentral {
-                sonatype {
-                    active = 'ALWAYS'
-                    applyMavenCentralRules = true
-                    password = System.getenv("MAVEN_PASSWORD")
-                    url = 'https://central.sonatype.com/api/v1/publisher'
-                    username = System.getenv("MAVEN_USERNAME")
-                    stagingRepository('build/libs')
-                }
-            }
-        }
-    }
     signing {
         active = 'ALWAYS'
         armored = true
         passphrase = System.getenv("GPG_PASSPHRASE")
         publicKey = System.getenv("GPG_PUBLIC_KEY")
         secretKey = System.getenv("GPG_PRIVATE_KEY")
+    }
+    deploy {
+        maven {
+            mavenCentral {
+                sonatype {
+                    active = 'ALWAYS'
+                    applyMavenCentralRules = true
+                    //password = System.getenv("MAVEN_PASSWORD")
+                    password = "1c3CtrbDpx9HVZ1II0z57wDKjXEvFnJ+CQy7Vj6MyFdq"
+                    url = 'https://central.sonatype.com/api/v1/publisher'
+                    //username = System.getenv("MAVEN_USERNAME")
+                    username = "EcAOF698"
+                    stagingRepository('build/staging-deploy')
+                }
+            }
+        }
+    }
+    project {
+        copyright = 'Predell Services'
+        description = 'Email MIME parser'
     }
 }
 
@@ -94,6 +100,12 @@ publishing {
                         url = 'https://spdx.org/licenses/Apache-2.0.html'
                     }
                 }
+                developers {
+                    developer {
+                        id = 'krenou'
+                        name = 'Karl Renou'
+                    }
+                }
                 scm {
                     connection = 'scm:git:https://github.com/predell/email-mime-parser.git'
                     developerConnection = 'scm:git:ssh://github.com/predell/email-mime-parser.git'
@@ -104,7 +116,7 @@ publishing {
     }
     repositories {
         maven {
-            url = layout.buildDirectory.dir('libs')
+            url = layout.buildDirectory.dir('staging-deploy')
         }
     }
 }
